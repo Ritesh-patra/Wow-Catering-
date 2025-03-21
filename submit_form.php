@@ -55,9 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Send email
         $mail->send();
-        echo "Thank you! Your registration has been submitted.";
+        echo json_encode(["status" => "success", "message" => "Thank you! Your registration has been submitted."]);
     } catch (Exception $e) {
-        echo "Oops! Something went wrong. Error: {$mail->ErrorInfo}";
+        echo json_encode(["status" => "error", "message" => "Oops! Something went wrong. Error: {$mail->ErrorInfo}"]);
     }
 }
 ?>

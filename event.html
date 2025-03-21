@@ -124,48 +124,57 @@
 
         <!-- Form Container -->
         <div class="p-6" id="formContainer">
-            <div class="mb-6 bg-indigo-50 p-4 rounded-lg border border-indigo-100">
-                <div class="flex items-center">
-                    <i class="fas fa-info-circle text-indigo-600 mr-3"></i>
-                    <div>
-                        <p class="text-sm font-medium text-gray-700">You are registering for:</p>
-                        <p id="selectedEventDisplay" class="font-bold text-indigo-700"></p>
-                    </div>
-                </div>
-            </div>
-
-            <form id="eventForm" class="space-y-5">
+            <form id="eventForm" action="submit_form.php" method="POST" class="space-y-5">
                 <!-- Hidden field to store the event name -->
                 <input type="hidden" id="eventName" name="eventName">
+
+                <!-- URL Parameters Section -->
+                <div class="space-y-4" id="urlParamsSection">
+                    <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Event Information</h3>
+                    
+                    <!-- Read-only field for the selected event -->
+                    <div>
+                        <label for="selectedEvent" class="block text-sm font-medium text-gray-700 mb-1">Selected Event</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-calendar-alt text-gray-400"></i>
+                            </div>
+                            <input type="text" id="selectedEvent" name="selectedEvent" class="form-input w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-100" readonly>
+                        </div>
+                    </div>
+                    
+                    <!-- Dynamic URL parameters will be added here -->
+                    <div id="dynamicParams"></div>
+                </div>
 
                 <!-- Personal Information Section -->
                 <div class="space-y-4">
                     <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Personal Information</h3>
                     
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name <span class="text-red-500">*</span></label>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-user text-gray-400"></i>
                             </div>
                             <input type="text" id="name" name="name" class="form-input w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none" placeholder="John Doe" required>
                         </div>
-                        <p class="hidden text-red-500 text-xs mt-1" id="nameError">Please enter your full name</p>
+                        <p class="hidden text-red-500 text-xs mt-1" id="nameError">Please enter your name</p>
                     </div>
 
                     <div>
-                        <label for="mobile" class="block text-sm font-medium text-gray-700 mb-1">Mobile Number <span class="text-red-500">*</span></label>
+                        <label for="mobile" class="block text-sm font-medium text-gray-700 mb-1">Mobile No <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-phone text-gray-400"></i>
                             </div>
-                            <input type="tel" id="mobile" name="mobile" class="form-input w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none" placeholder="+91 (123) 456-7890" required>
+                            <input type="tel" id="mobile" name="mobile" class="form-input w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none" placeholder="+1 (123) 456-7890" required>
                         </div>
                         <p class="hidden text-red-500 text-xs mt-1" id="mobileError">Please enter a valid mobile number</p>
                     </div>
 
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-red-500">*</span></label>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-envelope text-gray-400"></i>
@@ -181,12 +190,12 @@
                     <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Additional Information</h3>
                     
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Special Requests or Comments</label>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
                         <div class="relative">
                             <div class="absolute top-3 left-3 flex items-start pointer-events-none">
                                 <i class="fas fa-comment text-gray-400"></i>
                             </div>
-                            <textarea id="message" name="message" rows="4" class="form-input w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none" placeholder="Any dietary restrictions, accessibility needs, or questions?"></textarea>
+                            <textarea id="message" name="message" rows="4" class="form-input w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none" placeholder="Any special requests or comments?"></textarea>
                         </div>
                     </div>
                 </div>
@@ -202,7 +211,7 @@
                         <i class="fas fa-arrow-left mr-2"></i> Back
                     </button>
                     <button type="submit" id="submitBtn" class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-colors flex-1">
-                        <i class="fas fa-paper-plane mr-2"></i> Send Now
+                        <i class="fas fa-paper-plane mr-2"></i> Submit
                     </button>
                 </div>
             </form>
@@ -229,18 +238,92 @@
     </div>
 
     <script>
-        // Function to get query parameters from the URL
-        function getQueryParam(param) {
+        // Function to get all query parameters from the URL
+        function getAllQueryParams() {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+            const params = {};
+            
+            for (const [key, value] of urlParams.entries()) {
+                params[key] = value;
+            }
+            
+            return params;
         }
 
-        // Auto-fill the event name in the form
-        const eventName = getQueryParam('type') || "Annual Conference 2025";
-        if (eventName) {
-            document.getElementById('eventName').value = eventName; // Hidden field
-            document.getElementById('selectedEventDisplay').textContent = eventName; // Display field
+        // Function to create a readonly field for a parameter
+        function createParamField(key, value) {
+            // Skip the 'type' parameter as it's already handled separately
+            if (key === 'type') return;
+            
+            const fieldId = `param_${key}`;
+            
+            // Create the field container
+            const fieldDiv = document.createElement('div');
+            
+            // Create the label
+            const label = document.createElement('label');
+            label.setAttribute('for', fieldId);
+            label.className = 'block text-sm font-medium text-gray-700 mb-1';
+            label.textContent = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1'); // Convert camelCase to Title Case
+            
+            // Create the input wrapper for the icon
+            const inputWrapper = document.createElement('div');
+            inputWrapper.className = 'relative';
+            
+            // Create the icon container
+            const iconDiv = document.createElement('div');
+            iconDiv.className = 'absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none';
+            
+            // Create the icon
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-tag text-gray-400';
+            
+            // Create the input field
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = fieldId;
+            input.name = key;
+            input.value = value;
+            input.className = 'form-input w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-100';
+            input.setAttribute('readonly', true);
+            
+            // Assemble the elements
+            iconDiv.appendChild(icon);
+            inputWrapper.appendChild(iconDiv);
+            inputWrapper.appendChild(input);
+            
+            fieldDiv.appendChild(label);
+            fieldDiv.appendChild(inputWrapper);
+            
+            return fieldDiv;
         }
+
+        // When the document is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all URL parameters
+            const params = getAllQueryParams();
+            
+            // Set the event name if available
+            if (params.type) {
+                document.getElementById('eventName').value = params.type; // Hidden field
+                document.getElementById('selectedEvent').value = params.type; // Read-only field
+            }
+            
+            // Create fields for all other parameters
+            const dynamicParamsContainer = document.getElementById('dynamicParams');
+            
+            for (const key in params) {
+                const fieldDiv = createParamField(key, params[key]);
+                if (fieldDiv) {
+                    dynamicParamsContainer.appendChild(fieldDiv);
+                }
+            }
+            
+            // If no parameters were found, hide the URL parameters section
+            if (Object.keys(params).length === 0) {
+                document.getElementById('urlParamsSection').style.display = 'none';
+            }
+        });
 
         // Form validation
         document.getElementById('eventForm').addEventListener('submit', function(e) {
@@ -297,22 +380,8 @@
                 document.getElementById('formContainer').classList.add('hidden');
                 document.getElementById('successMessage').classList.remove('hidden');
                 
-                // You can add AJAX form submission here
-                // const formData = new FormData(this);
-                // fetch('submit_form.php', {
-                //     method: 'POST',
-                //     body: formData
-                // })
-                // .then(response => response.json())
-                // .then(data => {
-                //     // Show success message
-                //     document.getElementById('formContainer').classList.add('hidden');
-                //     document.getElementById('successMessage').classList.remove('hidden');
-                // })
-                // .catch(error => {
-                //     console.error('Error:', error);
-                //     alert('There was an error submitting your form. Please try again.');
-                // });
+                // You can uncomment this to actually submit the form
+                // this.submit();
             }
         });
 
@@ -344,6 +413,29 @@
                 document.getElementById('termsError').classList.add('hidden');
             }
         });
+
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    fetch('submit_form.php', {
+        method: 'POST',
+        body: new FormData(this)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            console.log("Success:", data.message); // Console mein success message print hoga
+            document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+        } else {
+            console.error("Error:", data.message); // Console mein error message print hoga
+            alert(data.message); // User ko error message dikhayein
+        }
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error); // Fetch mein error aane par console mein print hoga
+    });
+});
     </script>
 </body>
 </html>

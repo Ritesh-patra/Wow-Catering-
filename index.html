@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <style>
-     body {
-            scroll-behavior: smooth; /* Smooth scrolling enable */
-        }
+    body {
+        scroll-behavior: smooth;
+        /* Smooth scrolling enable */
+    }
 
     .gradient-border {
         border-width: 9px;
@@ -110,7 +111,7 @@
         <button id="menu-btn" class="md:hidden text-2xl">☰</button>
     </nav>
 
-    <div id="menu" class="fixed top-[-100%] left-0 w-full bg-black shadow-md p-6 transition-all duration-500 z-40">
+    <div id="menu" class="absolute top-[-100%] left-0 w-full bg-black shadow-md p-6 transition-all duration-500 z-40">
         <button id="close-btn" class="text-xl text-white">✕</button>
         <div class="mt-4 flex bg-black text-white flex-col space-y-6">
             <a href="gallery.html" class="hover:text-blue-500">Gallery</a>
@@ -120,7 +121,7 @@
         </div>
     </div>
 
-    <header id="page1" style="background-image: url('images/hero.jpg');"
+    <header id="page1" style="background-image: url('https://i.pinimg.com/736x/94/e9/6a/94e96a093129648e861f80d384a35088.jpg');"
         class="w-full h-full bg-center bg-cover bg-no-repeat relative">
         <div
             class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white px-4">
@@ -136,7 +137,7 @@
                     <span>Explore</span>
                     <span class="text-lg"><i class="ri-arrow-right-line"></i></span>
                 </a>
-                <a href="javascript:void(0);" onclick="openContact()"
+                <a href="event.html?type=OurServices like (Wedding, House Warming,Engagement so on!)" "
                     class="px-6 py-2 border border-white rounded-full flex items-center space-x-2">
                     <span>Book Now</span>
                     <span class="text-lg"><i class="ri-arrow-right-line"></i></span>
@@ -243,38 +244,54 @@
         <section class="container mx-auto px-4 md:px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Wedding Event -->
-                <div class="bg-amber-100 rounded-2xl overflow-hidden shadow-lg">
-                    <img src="images/wedding.jpg" alt="">
-                    <div class="p-6">
-                        <h2 class="font1 text-2xl font-bold text-gray-900 mb-4">Wedding Event</h2>
-                        <p class="text-gray-700 text-left">
-                            WOW Caterer makes your wedding feast unforgettable with exquisite flavors and exceptional service. As Odisha's top caterer, we blend taste, tradition, and elegance to create a grand culinary experience. From lavish buffets to customized menus, we ensure every bite delights your guests, making your special day truly magical!
-                        </p>
+                <a href="event.html?type=Anniversary%20Event" class="block">
+                    <div class="bg-amber-200 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="images/wedding.jpg" alt="Anniversary Event">
+                        <div class="p-6">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4 font1">Wedding Event</h2>
+                            <p class="text-gray-700 text-left">
+                                WOW Caterer makes your wedding feast unforgettable with exquisite flavors and
+                                exceptional service. As Odisha's leading caterer, we blend taste, tradition, and
+                                elegance to create a grand culinary experience. From lavish buffets to customized menus,
+                                we ensure every bite delights your guests, making your special day truly magical!
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- Engagement -->
-                <div class="bg-amber-300 rounded-2xl overflow-hidden  shadow-lg">
-                    <img src="images/engagement 1.jpg" alt="">
-                    <div class="p-6">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4 font1">Engagement</h2>
-                        <p class="text-gray-700 text-left">
-                            WOW Caterer makes your Ring Ceremony extraordinary with exquisite cuisine and seamless service. From traditional delicacies to modern fusion flavors, our expert chefs craft a lavish menu tailored to your taste. With impeccable hospitality and presentation, we ensure a delightful dining experience, making your celebration truly unforgettable!
-                        </p>
+                <a href="event.html?type=Engagement" class="block">
+                    <div class="bg-amber-100 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg?t=st=1742544206~exp=1742547806~hmac=04ca64c694929a46bb3dbee87e28ceb6fc17dadb8d9456c4a0308c825f2c8c14&w=1380"
+                            alt="Engagement">
+                        <div class="p-6">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4 font1">Engagement</h2>
+                            <p class="text-gray-700 text-left">
+                                WOW Caterer makes your Ring Ceremony extraordinary with exquisite cuisine and seamless
+                                service. From traditional delicacies to modern fusion flavors, our expert chefs craft a
+                                lavish menu tailored to your taste. With impeccable hospitality and presentation, we
+                                ensure a delightful dining experience, making your celebration truly unforgettable!
+                            </p>
+                        </div>
                     </div>
-                </div>
-            
+                </a>
+
 
                 <!-- Birthday Party -->
-                <div class="bg-amber-300 rounded-2xl overflow-hidden  shadow-lg">
-                    <img src="images/birthday new.jpg" alt="">
-                    <div class="p-6">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4 font1">Birthday Party</h2>
-                        <p class="text-gray-700 text-left">
-                            WOW Caterer makes your birthday celebration unforgettable with delicious delights and seamless service. From themed party menus to gourmet spreads and customized cakes, we craft flavors that impress every guest. Whether a kid's party or a grand event, we ensure a vibrant, joy-filled feast that makes your day truly WOW-worthy!
-                        </p>
+                <a href="event.html?type=Birthday Party" class="block">
+                    <div class="bg-amber-300 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="images/birthday new.jpg" alt="Birthday Party">
+                        <div class="p-6">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4 font1">Birthday Party</h2>
+                            <p class="text-gray-700 text-left">
+                                WOW Caterer makes your birthday celebration unforgettable with delicious delights and
+                                seamless service. From themed party menus to gourmet spreads and customized cakes, we
+                                craft flavors that impress every guest. Whether a kid’s party or a grand event, we
+                                ensure a vibrant, joy-filled feast that makes your day truly WOW-worthy!
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- View All Services Button -->
@@ -372,7 +389,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 gap-6 mt-12">
             <!-- Years Of Excellence -->
-            <div style="background-image: url('images/last1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+            <div style="background-image: url('https://i.pinimg.com/736x/f4/16/96/f4169602f9c8a40a0fac0f1157763a28.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
                 class="bg-white rounded-lg shadow-lg p-6 text-center h-48 flex flex-col justify-center relative overflow-hidden">
                 <!-- Overlay for inner effect -->
                 <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -385,7 +402,7 @@
             </div>
 
             <!-- Menu Options -->
-            <div style="background-image: url('images/last2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+            <div style="background-image: url('https://i.pinimg.com/736x/36/08/9d/36089d4a1c808586b5907ae7477f87be.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
                 class="bg-white rounded-lg shadow-lg p-6 text-center h-48 flex flex-col justify-center relative overflow-hidden">
                 <!-- Overlay for inner effect -->
                 <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -398,7 +415,7 @@
             </div>
 
             <!-- Happy Foodies -->
-            <div style="background-image: url('images/last3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+            <div style="background-image: url('https://i.pinimg.com/736x/56/1d/f0/561df0ddacb3d0ddd77ef4dfa6226c9f.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
                 class="bg-white rounded-lg shadow-lg p-6 text-center h-48 flex flex-col justify-center relative overflow-hidden">
                 <!-- Overlay for inner effect -->
                 <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -411,7 +428,7 @@
             </div>
 
             <!-- Anniversary -->
-            <div style="background-image: url('images/last44.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+            <div style="background-image: url('https://i.pinimg.com/736x/f3/7b/75/f37b7570ab6da074791f289dd5a0221c.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
                 class="bg-white rounded-lg shadow-lg p-6 text-center h-48 flex flex-col justify-center relative overflow-hidden">
                 <!-- Overlay for inner effect -->
                 <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -469,10 +486,10 @@
                     class="social-icon text-2xl">
                     <i class="ri-facebook-fill"></i>
                 </a>
-                <a href="#" class="social-icon text-2xl">
+                <a href="https://www.instagram.com/wow_caterer" class="social-icon text-2xl">
                     <i class=" ri-instagram-line"></i>
                 </a>
-                <a href="+919040282824" class="social-icon text-2xl">
+                <a href="tel:+919040282824" class="social-icon text-2xl">
                     <i class="ri-whatsapp-line"></i>
                 </a>
             </div>
@@ -583,6 +600,7 @@
             const menuBtn = document.getElementById('menu-btn');
             const closeBtn = document.getElementById('close-btn');
             const menu = document.getElementById('menu');
+            
 
             menuBtn.addEventListener('click', () => {
                 menu.style.top = '60px';
