@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve form data
     $eventName = $_POST['eventName'];
     $selectedEvent = $_POST['selectedEvent'];
+    $eventType = $_POST['eventType']; // Naya field: eventType
     $name = $_POST['name'];
     $mobile = $_POST['mobile'];
     $email = $_POST['email'];
@@ -19,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate and sanitize data
     $eventName = htmlspecialchars($eventName);
     $selectedEvent = htmlspecialchars($selectedEvent);
+    $eventType = htmlspecialchars($eventType); // Sanitize eventType
     $name = htmlspecialchars($name);
     $mobile = htmlspecialchars($mobile);
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -46,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Subject = "New Event Registration: $selectedEvent"; // Email subject
         $mail->Body = "
             <h1>New Event Registration</h1>
+            <p><strong>Event Type:</strong> $eventType</p>
             <p><strong>Event:</strong> $selectedEvent</p>
             <p><strong>Name:</strong> $name</p>
             <p><strong>Mobile:</strong> $mobile</p>
