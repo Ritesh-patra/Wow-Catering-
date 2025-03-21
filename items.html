@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .menu-item {
+            transition: background-color 0.3s ease;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .submenu.active {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="max-w-9xl mx-auto">
+        <!-- Main Menu Categories -->
+        <div class="bg-black text-gray-300 p-4 grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="welcome">WELCOME DRINK</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="soup-veg">SOUP(VEG)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="soup-nonveg">SOUP(NON-VEG)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="chat">CHAT COUNTER</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="dressing-veg">COUNTER
+                DRESSING(VEG)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="dressing-nonveg">COUNTER
+                DRESSING(NON-VEG)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-veg">STARTERS(VEG)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-paneer">STARTERS(PANEER)
+            </div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-mushroom">
+                STARTERS(MUSHROOM)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-chicken">
+                STARTERS(CHICKEN)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white bg-red-700 text-white"
+                data-category="starters-fish">STARTERS(FISH)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-prawn">STARTERS(PRAWN)
+            </div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-egg">STARTERS(EGG)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-mutton">STARTERS(MUTTON)
+            </div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="main-rice">MAIN COURSE(RICE)</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="main-nonveg">MAIN COURSE(NON-VEG)
+            </div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="breads">POPULAR INDIAN BREADS
+            </div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="noodles">NOODLES</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="dal">DAL</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="chutney">ASSORTED INDIAN CHUTNEY
+            </div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="vegetables">CHOICE OF VEGETABLES
+            </div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="paneer">PANEER DELICACIES</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="mushroom">MUSHROOM DELICACIES
+            </div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="chicken">CHICKEN CUISINES</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="fish">FISH VARIETIES</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="prawns">PRAWNS & CRABS AUTHENTIC
+                CUISINE</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="mutton">MUTTON DELICACIES</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="eggs">EGGS</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="desert">DESERT</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="icecream">ICE CREAM</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="bakery">BAKERY</div>
+            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="pan">PAN</div>
+        </div>
+
+
+
+        <!-- Submenu Containers -->
+        <div id="submenu-container" class="bg-white rounded-md flex flex-col  shadow-md mb-10">
+            <!-- Fish Starters Submenu (shown by default) -->
+            <div id="starters-fish-submenu" class="submenu py-7 active p-4">
+                <h2 class="text-xl font-semibold mb-4">FISH(STARTERS)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-finger" class="mr-2">
+                        <label for="fish-finger">Fish Finger</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="periperi-fish" class="mr-2">
+                        <label for="periperi-fish">Periperi Fish Finger</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-cutlet" class="mr-2">
+                        <label for="fish-cutlet">Fish Cutlet</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-salt-pepper" class="mr-2">
+                        <label for="fish-salt-pepper">Fish Salt & Pepper</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-dragon" class="mr-2">
+                        <label for="fish-dragon">Fish Dragon</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chilly-fish" class="mr-2">
+                        <label for="chilly-fish">Chilly Fish</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-cheese-ball" class="mr-2">
+                        <label for="fish-cheese-ball">Fish Cheese Ball</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-pokoda" class="mr-2">
+                        <label for="fish-pokoda">Fish Pokoda</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-kabiraji" class="mr-2">
+                        <label for="fish-kabiraji">Fish Kabiraji</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="ajwaini-fish" class="mr-2">
+                        <label for="ajwaini-fish">Ajwaini Fish</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-colliwada" class="mr-2">
+                        <label for="fish-colliwada">Fish Colliwada</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-amritshari" class="mr-2">
+                        <label for="fish-amritshari">Fish Amritshari</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="tandoori-fish" class="mr-2">
+                        <label for="tandoori-fish">Tandoori Fish (Basa / Jalanga / Vekti)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="tandoori-pomfret" class="mr-2">
+                        <label for="tandoori-pomfret">Tandoori Pomfret</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="pomfret-tawa" class="mr-2">
+                        <label for="pomfret-tawa">Pomfret Tawa Fry</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="pomfret-fry" class="mr-2">
+                        <label for="pomfret-fry">Pomfret Fry</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="fish-patudi" class="mr-2">
+                        <label for="fish-patudi">Fish Patudi</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Welcome Drink Submenu -->
+            <div data-category="welcome" id="welcome-submenu" class="submenu py px-4 py-7 active">
+                <h2 class="text-xl font-semibold mb-4">WELCOME DRINK</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-1" class="mr-2">
+                        <label for="welcome-1">Badam shake</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-2" class="mr-2">
+                        <label for="welcome-2">mango Shake</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-3" class="mr-2">
+                        <label for="welcome-3">Badam Milk</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Oreo shake</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Fruit Shake</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Cold Coffee</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Soda Beverages</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Pudina Jaljieera</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Lassi</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Chhaas/Butter Milk</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Strawberry imperial</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Pineapple Surpise</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Mango Blossom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Aam Panna</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Ginger Peach Soda</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Water melon Cooler</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Shikanji</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Wild Cat Cooler</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Pineapple Cobbler</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Coffee Bar</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Tea</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Hot Kesar Milk</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Orange Squash</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Fresh Juice Soda</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Masala Cold Drinks</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Tender Coconut Water</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="welcome-4" class="mr-2">
+                        <label for="welcome-4">Masala Chaach</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soup Veg Submenu -->
+            <div id="soup-veg-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">SOUP(VEG)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Clear Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Man chow Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Hot & Sour Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Lemon Coriander Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Burnt Garlic Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Sweet Corn Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Seven Seas Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Thai Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Thai Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Cream of Tomato Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Palak Sorba</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Cream of Broccoli Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Glorious Special Veg Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Veg Lung Fung Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-veg-1" class="mr-2">
+                        <label for="soup-veg-1">Cantonese Soup</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soup Non-Veg Submenu -->
+            <div id="soup-nonveg-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">SOUP (NON-VEG)</h2>
+                <div class="space-y-3">
+                    <!-- New Items -->
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-1" class="mr-2">
+                        <label for="soup-nonveg-1">Chicken Clear Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-2" class="mr-2">
+                        <label for="soup-nonveg-2">Cream of Chicken Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-3" class="mr-2">
+                        <label for="soup-nonveg-3">Chicken Manchow Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-4" class="mr-2">
+                        <label for="soup-nonveg-4">Slice Chicken Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-5" class="mr-2">
+                        <label for="soup-nonveg-5">Chicken Hot & Sour Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-6" class="mr-2">
+                        <label for="soup-nonveg-6">Chicken Burnt Garlic Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-7" class="mr-2">
+                        <label for="soup-nonveg-7">Chicken Sweet Corn Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-8" class="mr-2">
+                        <label for="soup-nonveg-8">Chicken Thai Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-9" class="mr-2">
+                        <label for="soup-nonveg-9">Chicken Singapore Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-10" class="mr-2">
+                        <label for="soup-nonveg-10">Chicken Wonton Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-11" class="mr-2">
+                        <label for="soup-nonveg-11">Chicken Hot Pot Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-12" class="mr-2">
+                        <label for="soup-nonveg-12">Chicken Lung Fung Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-13" class="mr-2">
+                        <label for="soup-nonveg-13">Murg Shorba</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-14" class="mr-2">
+                        <label for="soup-nonveg-14">Mutton Sorba</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-15" class="mr-2">
+                        <label for="soup-nonveg-15">Mutton Paya Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-16" class="mr-2">
+                        <label for="soup-nonveg-16">Seafood Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-17" class="mr-2">
+                        <label for="soup-nonveg-17">Prawn Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-18" class="mr-2">
+                        <label for="soup-nonveg-18">Crab Burnt Garlic Soup</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="soup-nonveg-19" class="mr-2">
+                        <label for="soup-nonveg-19">Glorious Special Non Veg Soup</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Counter Submenu -->
+            <div id="chat-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">CHAT COUNTER</h2>
+                <div class="space-y-3">
+                    <!-- New Items -->
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-1" class="mr-2">
+                        <label for="chat-1">Basket Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-2" class="mr-2">
+                        <label for="chat-2">Papdi Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-3" class="mr-2">
+                        <label for="chat-3">Aloo Tikki Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-4" class="mr-2">
+                        <label for="chat-4">Khasta Kachori Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-5" class="mr-2">
+                        <label for="chat-5">Dahi Samosa Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-6" class="mr-2">
+                        <label for="chat-6">Raj Kachori Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-7" class="mr-2">
+                        <label for="chat-7">Dahi Samosa Chole Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-8" class="mr-2">
+                        <label for="chat-8">Dahi Tikki Chole Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-9" class="mr-2">
+                        <label for="chat-9">Palak Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-10" class="mr-2">
+                        <label for="chat-10">Ragada Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-11" class="mr-2">
+                        <label for="chat-11">Dahi Valla</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-12" class="mr-2">
+                        <label for="chat-12">Barbecue Potato Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-13" class="mr-2">
+                        <label for="chat-13">Matar Chat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-14" class="mr-2">
+                        <label for="chat-14">Dahi Vada & Aloo Dum</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-15" class="mr-2">
+                        <label for="chat-15">Dhokla</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-16" class="mr-2">
+                        <label for="chat-16">Pao Bhaji</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-17" class="mr-2">
+                        <label for="chat-17">Chhole Bature</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-18" class="mr-2">
+                        <label for="chat-18">Panipuri (Imli Water / Pudina Water / Dahi Garlic Water / Dahi)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-19" class="mr-2">
+                        <label for="chat-19">Sev Puri</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chat-20" class="mr-2">
+                        <label for="chat-20">Dahi Sev Puri</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Counter Dressing Veg Submenu -->
+            <div id="dressing-veg-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">COUNTER DRESSING(VEG)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-1" class="mr-2">
+                        <label for="dressing-veg-1">Dahi Bada</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-2" class="mr-2">
+                        <label for="dressing-veg-2">Stuffed Dahi Bada</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-3" class="mr-2">
+                        <label for="dressing-veg-3">Papad (fried/roasted)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-4" class="mr-2">
+                        <label for="dressing-veg-4">Coin Papad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-5" class="mr-2">
+                        <label for="dressing-veg-5">Rasi Papad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-6" class="mr-2">
+                        <label for="dressing-veg-6">Special Papad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-7" class="mr-2">
+                        <label for="dressing-veg-7">Pickle</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-8" class="mr-2">
+                        <label for="dressing-veg-8">Assorted Pickle</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-9" class="mr-2">
+                        <label for="dressing-veg-9">Masala Papad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-10" class="mr-2">
+                        <label for="dressing-veg-10">Rainbow Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-11" class="mr-2">
+                        <label for="dressing-veg-11">Corn Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-12" class="mr-2">
+                        <label for="dressing-veg-12">Russian Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-13" class="mr-2">
+                        <label for="dressing-veg-13">Classic Macaroni Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-14" class="mr-2">
+                        <label for="dressing-veg-14">Italian Chopped Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-15" class="mr-2">
+                        <label for="dressing-veg-15">Chinese Cabbage Sesame Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-16" class="mr-2">
+                        <label for="dressing-veg-16">Greek Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-17" class="mr-2">
+                        <label for="dressing-veg-17">Crispy Noodle Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-18" class="mr-2">
+                        <label for="dressing-veg-18">Pasta Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-19" class="mr-2">
+                        <label for="dressing-veg-19">Sprout Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-20" class="mr-2">
+                        <label for="dressing-veg-20">Mexican Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-21" class="mr-2">
+                        <label for="dressing-veg-21">Fruit Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-22" class="mr-2">
+                        <label for="dressing-veg-22">Veg Peanut Sesame Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-23" class="mr-2">
+                        <label for="dressing-veg-23">Pindi Chana Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-24" class="mr-2">
+                        <label for="dressing-veg-24">Veg Caesar Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-25" class="mr-2">
+                        <label for="dressing-veg-25">Pineapple Cucumber Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-26" class="mr-2">
+                        <label for="dressing-veg-26">Barbecue Potato Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-27" class="mr-2">
+                        <label for="dressing-veg-27">Thai Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-28" class="mr-2">
+                        <label for="dressing-veg-28">Sprouted Beans</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-29" class="mr-2">
+                        <label for="dressing-veg-29">Pindi Chole Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-30" class="mr-2">
+                        <label for="dressing-veg-30">Lachha Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-31" class="mr-2">
+                        <label for="dressing-veg-31">Spicy South Indian Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-32" class="mr-2">
+                        <label for="dressing-veg-32">Indian Lentil Salad</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Counter Dressing Non-Veg Submenu -->
+            <div id="dressing-nonveg-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">COUNTER DRESSING(NON-VEG)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-1" class="mr-2">
+                        <label for="dressing-veg-1">Chicken Russian Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-2" class="mr-2">
+                        <label for="dressing-veg-2">Chicken Caesar Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-3" class="mr-2">
+                        <label for="dressing-veg-3">Chicken Greek Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-4" class="mr-2">
+                        <label for="dressing-veg-4">Egg Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-5" class="mr-2">
+                        <label for="dressing-veg-5">Non-Veg Mexican Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-6" class="mr-2">
+                        <label for="dressing-veg-6">Chicken Thai Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-7" class="mr-2">
+                        <label for="dressing-veg-7">Seafood Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-8" class="mr-2">
+                        <label for="dressing-veg-8">Prawn Thai Salad</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-9" class="mr-2">
+                        <label for="dressing-veg-9">Crab Thai Salad</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Starters Veg Submenu -->
+            <div id="starters-veg-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">Starters Veg Submenu</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-1" class="mr-2">
+                        <label for="dressing-veg-1">Veg Cutlet</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-2" class="mr-2">
+                        <label for="dressing-veg-2">Veg Seasoning Pakoda</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-3" class="mr-2">
+                        <label for="dressing-veg-3">Veg Manchurian</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-4" class="mr-2">
+                        <label for="dressing-veg-4">Veg Gold Coin</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-5" class="mr-2">
+                        <label for="dressing-veg-5">Veg Cheese Ball</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-6" class="mr-2">
+                        <label for="dressing-veg-6">Veg Nuggets</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-7" class="mr-2">
+                        <label for="dressing-veg-7">Veg Hara Bhara Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-8" class="mr-2">
+                        <label for="dressing-veg-8">Veg Dahi Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-9" class="mr-2">
+                        <label for="dressing-veg-9">Veg Cheese Cigars</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-10" class="mr-2">
+                        <label for="dressing-veg-10">Veg Spring Roll</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-11" class="mr-2">
+                        <label for="dressing-veg-11">Veg Lollypop</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-12" class="mr-2">
+                        <label for="dressing-veg-12">Veg Shaslik</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-13" class="mr-2">
+                        <label for="dressing-veg-13">Veg Sheekh Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-14" class="mr-2">
+                        <label for="dressing-veg-14">Veg Tangri Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-15" class="mr-2">
+                        <label for="dressing-veg-15">Veg Cheese Poppers</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-16" class="mr-2">
+                        <label for="dressing-veg-16">Veg Mexican Roll</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-17" class="mr-2">
+                        <label for="dressing-veg-17">Veg Dragon Roll</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-18" class="mr-2">
+                        <label for="dressing-veg-18">Veg Sandwich</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-19" class="mr-2">
+                        <label for="dressing-veg-19">Veg Grilled Sandwich</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-20" class="mr-2">
+                        <label for="dressing-veg-20">Veg Pasta (Red Sauce)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-21" class="mr-2">
+                        <label for="dressing-veg-21">Veg Pasta (White Sauce)</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Starters Paneer Submenu -->
+            <div id="starters-paneer-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">Starters Paneer</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-1" class="mr-2">
+                        <label for="dressing-veg-1">Paneer Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-2" class="mr-2">
+                        <label for="dressing-veg-2">Paneer Malai Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-3" class="mr-2">
+                        <label for="dressing-veg-3">Paneer Hariyali Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-4" class="mr-2">
+                        <label for="dressing-veg-4">Paneer Achari Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-5" class="mr-2">
+                        <label for="dressing-veg-5">Paneer Afgani Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-6" class="mr-2">
+                        <label for="dressing-veg-6">Paneer Kali Mirch</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-7" class="mr-2">
+                        <label for="dressing-veg-7">Paneer Papdi Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-8" class="mr-2">
+                        <label for="dressing-veg-8">Paneer Lollipop</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-9" class="mr-2">
+                        <label for="dressing-veg-9">Paneer 65</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-10" class="mr-2">
+                        <label for="dressing-veg-10">Paneer Tilwala</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-11" class="mr-2">
+                        <label for="dressing-veg-11">Paneer Singapori Stick</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-12" class="mr-2">
+                        <label for="dressing-veg-12">Paneer Saslik</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-13" class="mr-2">
+                        <label for="dressing-veg-13">Paneer Pakoda</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-14" class="mr-2">
+                        <label for="dressing-veg-14">Paneer Cheese Ball</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-15" class="mr-2">
+                        <label for="dressing-veg-15">Paneer Stick</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-16" class="mr-2">
+                        <label for="dressing-veg-16">Paneer Manchurian Dry</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-17" class="mr-2">
+                        <label for="dressing-veg-17">Paneer Popcorn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-18" class="mr-2">
+                        <label for="dressing-veg-18">Paneer Nuggets</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-19" class="mr-2">
+                        <label for="dressing-veg-19">Paneer Chilly Ciggarsh</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-20" class="mr-2">
+                        <label for="dressing-veg-20">Paneer Fritters</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-21" class="mr-2">
+                        <label for="dressing-veg-21">Paneer Salt & Pepper</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-22" class="mr-2">
+                        <label for="dressing-veg-22">Paneer Tawa</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-23" class="mr-2">
+                        <label for="dressing-veg-23">Paneer Chilly</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-24" class="mr-2">
+                        <label for="dressing-veg-24">Paneer Schezwan Stick</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-25" class="mr-2">
+                        <label for="dressing-veg-25">Paneer Schezwan Finger</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-26" class="mr-2">
+                        <label for="dressing-veg-26">Paneer Finger</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-27" class="mr-2">
+                        <label for="dressing-veg-27">Paneer Hot Pan</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Starters Mushroom Submenu -->
+            <div id="starters-mushroom-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">Starters Mushroom</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-1" class="mr-2">
+                        <label for="dressing-veg-1">Mushroom Duplex</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-2" class="mr-2">
+                        <label for="dressing-veg-2">Mushroom Coliwada</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-3" class="mr-2">
+                        <label for="dressing-veg-3">Mushroom 65</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-4" class="mr-2">
+                        <label for="dressing-veg-4">Mushroom Salt & Pepper</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-5" class="mr-2">
+                        <label for="dressing-veg-5">Mushroom Cutlet</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-6" class="mr-2">
+                        <label for="dressing-veg-6">Mushroom Manchurian</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-7" class="mr-2">
+                        <label for="dressing-veg-7">Mushroom Steer Fry</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-8" class="mr-2">
+                        <label for="dressing-veg-8">Mushroom Pakoda</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-9" class="mr-2">
+                        <label for="dressing-veg-9">Mushroom Kurkure</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-10" class="mr-2">
+                        <label for="dressing-veg-10">Tandoori Mushroom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-11" class="mr-2">
+                        <label for="dressing-veg-11">Stuffed Mushroom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-12" class="mr-2">
+                        <label for="dressing-veg-12">Cheese Stuffed Mushroom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-13" class="mr-2">
+                        <label for="dressing-veg-13">Garlic Mushroom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-14" class="mr-2">
+                        <label for="dressing-veg-14">Cheese Garlic Mushroom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-15" class="mr-2">
+                        <label for="dressing-veg-15">Creamy Garlic Mushroom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-16" class="mr-2">
+                        <label for="dressing-veg-16">Chilly Mushroom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-17" class="mr-2">
+                        <label for="dressing-veg-17">Chilly Garlic Mushroom</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-18" class="mr-2">
+                        <label for="dressing-veg-18">Stuffed Dhaniya & Pepper Mushroom</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Starters Chicken Submenu -->
+            <div id="starters-chicken-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">Starters (Chicken)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-1" class="mr-2">
+                        <label for="dressing-veg-1">Chicken Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-2" class="mr-2">
+                        <label for="dressing-veg-2">Chicken Malai Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-3" class="mr-2">
+                        <label for="dressing-veg-3">Chicken Hariyali Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-4" class="mr-2">
+                        <label for="dressing-veg-4">Chicken Pahadi Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-5" class="mr-2">
+                        <label for="dressing-veg-5">Chicken Reshmi Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-6" class="mr-2">
+                        <label for="dressing-veg-6">Chicken Makhmali Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-7" class="mr-2">
+                        <label for="dressing-veg-7">Chicken Cheesy Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-8" class="mr-2">
+                        <label for="dressing-veg-8">Chicken Afgani Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-9" class="mr-2">
+                        <label for="dressing-veg-9">Chicken Rasuni Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-10" class="mr-2">
+                        <label for="dressing-veg-10">Chicken Kasturi Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-11" class="mr-2">
+                        <label for="dressing-veg-11">Chicken Tandoori</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-12" class="mr-2">
+                        <label for="dressing-veg-12">Chicken Tangri</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-13" class="mr-2">
+                        <label for="dressing-veg-13">Chicken Kathi Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-14" class="mr-2">
+                        <label for="dressing-veg-14">Chicken Grilled</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-15" class="mr-2">
+                        <label for="dressing-veg-15">Chicken Galauti Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-16" class="mr-2">
+                        <label for="dressing-veg-16">Chicken Stick Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-17" class="mr-2">
+                        <label for="dressing-veg-17">Chicken BBQ</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-18" class="mr-2">
+                        <label for="dressing-veg-18">Chicken Sami Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-19" class="mr-2">
+                        <label for="dressing-veg-19">Chicken Gillafi Kebab</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-20" class="mr-2">
+                        <label for="dressing-veg-20">Chicken Pakoda</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-21" class="mr-2">
+                        <label for="dressing-veg-21">Chicken 65</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-22" class="mr-2">
+                        <label for="dressing-veg-22">Chicken Lollipop</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-23" class="mr-2">
+                        <label for="dressing-veg-23">Chicken Drums of Heaven</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-24" class="mr-2">
+                        <label for="dressing-veg-24">Chicken Majestic</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-25" class="mr-2">
+                        <label for="dressing-veg-25">Lemon Honey Chicken</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-26" class="mr-2">
+                        <label for="dressing-veg-26">Lemon Chicken</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Starters Prawn Submenu -->
+            <div id="starters-prawn-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">Starters Prawn</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-1" class="mr-2">
+                        <label for="dressing-veg-1">Prawn Gold Coin</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-2" class="mr-2">
+                        <label for="dressing-veg-2">Golden Fried Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-3" class="mr-2">
+                        <label for="dressing-veg-3">Barley Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-4" class="mr-2">
+                        <label for="dressing-veg-4">Prawn Salt & Pepper</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-5" class="mr-2">
+                        <label for="dressing-veg-5">Mustard Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-6" class="mr-2">
+                        <label for="dressing-veg-6">Garlic Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-7" class="mr-2">
+                        <label for="dressing-veg-7">Chilly Garlic Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-8" class="mr-2">
+                        <label for="dressing-veg-8">Chilly Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-9" class="mr-2">
+                        <label for="dressing-veg-9">Srimp Cocktail</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-10" class="mr-2">
+                        <label for="dressing-veg-10">Tawa Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-11" class="mr-2">
+                        <label for="dressing-veg-11">Prawn Cutlet</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-12" class="mr-2">
+                        <label for="dressing-veg-12">Chilly Honey Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-13" class="mr-2">
+                        <label for="dressing-veg-13">Prawn Streer Fry</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-14" class="mr-2">
+                        <label for="dressing-veg-14">Prawn Pakoda</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-15" class="mr-2">
+                        <label for="dressing-veg-15">Grilled Prawn</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-16" class="mr-2">
+                        <label for="dressing-veg-16">Grilled Prawn with Oyster Sauce</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-17" class="mr-2">
+                        <label for="dressing-veg-17">Prawn Tikka</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-18" class="mr-2">
+                        <label for="dressing-veg-18">Prawn Ajwani</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-19" class="mr-2">
+                        <label for="dressing-veg-19">Prawn Hariyali</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="dressing-veg-20" class="mr-2">
+                        <label for="dressing-veg-20">Prawn Patrapoda</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Starters egg submenu -->
+            <div id="starters-egg-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for Main Course Rice -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for Main Course Rice -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for Main Course Rice -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for Main Course Rice -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for ASSORTED INDIAN CHUTNEY-->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for CHOICE OF VEGETABLES-->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEER DELICACIES -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for MUSHROOM DELICACIES -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for CHICKEN CUISINES -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for FISH VARIETIES -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for PRAWNS & CRABS AUTHENTIC CUISINE-->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for MUTTON DELICACIES -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Example for Egg -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for Desert -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for Main Backery -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for ICE-Cream-->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for PAN -->
+            <div id="main-rice-submenu" class="submenu py-7 p-4">
+                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-1" class="mr-2">
+                        <label for="main-rice-1">Steamed Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-2" class="mr-2">
+                        <label for="main-rice-2">Jeera Rice</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-3" class="mr-2">
+                        <label for="main-rice-3">Veg Pulao</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="main-rice-4" class="mr-2">
+                        <label for="main-rice-4">Veg Biryani</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all menu items
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            // Add click event to each menu item
+            menuItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    // Get the category
+                    const category = this.getAttribute('data-category');
+
+                    // Remove active class and highlight from all menu items
+                    menuItems.forEach(menuItem => {
+                        menuItem.classList.remove('bg-red-700', 'text-white');
+                    });
+
+                    // Add highlight to clicked item
+                    this.classList.add('bg-red-700', 'text-white');
+
+                    // Hide all submenus
+                    const submenus = document.querySelectorAll('.submenu');
+                    submenus.forEach(submenu => {
+                        submenu.classList.remove('active');
+                    });
+
+                    // Show the selected submenu
+                    const targetSubmenu = document.getElementById(`${category}-submenu`);
+                    if (targetSubmenu) {
+                        targetSubmenu.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

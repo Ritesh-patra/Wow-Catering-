@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wow Catering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .food-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-[#FFF8DC] min-h-screen">
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Section Title -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold underline text-[#4B3621] mb-3">Our Gallery</h2>
+        </div>
+
+        <!-- All Dishes Section -->
+        <section id="all" class="mb-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 4 -->
+                <div class="food-card rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-72 flex items-center justify-center">
+                        <video autoplay muted loop class="h-full object-cover" src="videos/galv1.mp4"></video>
+                    </div>  
+                </div>
+
+                <!-- Card 1 -->
+                <div class="food-card rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-72 flex items-center justify-center">
+                        <img class="w-full h-full object-cover" src="images/gal1.jpg" alt="">
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="food-card rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-72 flex items-center justify-center">
+                        <img class="w-full h-full object-cover" src="images/gal2.jpg" alt="">
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="food-card rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-72 flex items-center justify-center">
+                        <img class="w-full h-full object-cover" src="images/gal3.jpg" alt="">
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="food-card rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-72 flex items-center justify-center">
+                        <video autoplay muted loop class="h-full object-cover" src="videos/galv2.mp4"></video>
+                    </div>  
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#8B4513] text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mt-6 text-sm text-gray-400">
+                © 2025 <span class="font-bold text-white">Wow Caterer</span> All rights reserved |
+                Designed By <span class="text-yellow-400 font-semibold">Spider Innovations</span>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
