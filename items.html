@@ -10,7 +10,7 @@
     <style>
          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
         
-         body {
+        body {
             font-family: 'Poppins', sans-serif;
             background-color: #f5f5f5;
         }
@@ -91,61 +91,77 @@
             background-color: #D32F2F;
             border-radius: 50%;
         }
+
+        .submenu {
+            display: none;
+        }
+
+        .submenu.active {
+            display: block;
+        }
+        
+        #submenu-container {
+            display: none; /* Hide submenu container by default */
+        }
+        
+        #submenu-container.active {
+            display: block; /* Show when a menu item is clicked */
+        }
     </style>
 </head>
 
 <body class="bg-gray-100">
     <div class="max-w-9xl mx-auto">
         <!-- Main Menu Categories -->
-        <div class="menu-container p-6 md:p-10">
+        <div class="menu-container p-4 md:p-10">
             <div class="max-w-7xl mx-auto">
                 <!-- Menu Header -->
-                <div class="text-center mb-8">
-                    <h2 class="menu-heading text-3xl md:text-4xl font-bold text-white mb-3">Our Culinary Selection</h2>
-                    <p class="text-gray-300 max-w-2xl mx-auto">Explore our extensive menu categories featuring the finest dishes from around the world</p>
-                    <div class="flex justify-center items-center gap-6 mt-4">
+                <div class="text-center mb-6 md:mb-8">
+                    <h2 class="menu-heading text-2xl md:text-4xl font-bold text-white mb-2 md:mb-3">Our Culinary Selection</h2>
+                    <p class="text-gray-300 text-sm md:text-base max-w-2xl mx-auto">Explore our extensive menu categories featuring the finest dishes from around the world</p>
+                    <div class="flex justify-center items-center gap-4 md:gap-6 mt-3 md:mt-4">
                         <div class="flex items-center gap-2">
                             <div class="veg-indicator"></div>
-                            <span class="text-gray-300 text-sm">Vegetarian</span>
+                            <span class="text-gray-300 text-xs md:text-sm">Vegetarian</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <div class="non-veg-indicator"></div>
-                            <span class="text-gray-300 text-sm">Non-Vegetarian</span>
+                            <span class="text-gray-300 text-xs md:text-sm">Non-Vegetarian</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Filter Buttons - Moved to top for better visibility -->
-                <div class="mb-6 flex flex-wrap justify-center gap-4">
-                    <button id="showVeg" class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition flex items-center gap-2">
+                <!-- Filter Buttons -->
+                <div class="mb-4 md:mb-6 flex flex-wrap justify-center gap-2 md:gap-4">
+                    <button id="showVeg" class="px-3 py-1 md:px-4 md:py-2 bg-green-700 text-white text-sm rounded-lg hover:bg-green-800 transition flex items-center gap-2">
                         <div class="veg-indicator"></div>
                         <span>Veg Only</span>
                     </button>
-                    <button id="showNonVeg" class="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800 transition flex items-center gap-2">
+                    <button id="showNonVeg" class="px-3 py-1 md:px-4 md:py-2 bg-red-700 text-white text-sm rounded-lg hover:bg-red-800 transition flex items-center gap-2">
                         <div class="non-veg-indicator"></div>
                         <span>Non-Veg Only</span>
                     </button>
-                    <button id="showAll" class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+                    <button id="showAll" class="px-3 py-1 md:px-4 md:py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-800 transition">
                         <span>Show All</span>
                     </button>
                 </div>
                 
                 <!-- Search Bar -->
-                <div class="relative w-full max-w-md mx-auto mb-8">
-                    <input type="text" id="searchMenu" placeholder="Search menu categories..." class="w-full px-4 py-2 pl-10 bg-black bg-opacity-70 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500">
+                <div class="relative w-full max-w-md mx-auto mb-6">
+                    <input type="text" id="searchMenu" placeholder="Search menu categories..." class="w-full px-4 py-2 pl-10 bg-black bg-opacity-70 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
                     <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                         <i class="fas fa-search"></i>
                     </div>
                 </div>
                 
                 <!-- Menu Categories Grid -->
-                <div class="menu-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+                <div class="menu-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4">
                     <!-- Welcome Drink -->
                     <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="welcome" data-type="both">
                         <div class="category-icon text-amber-500 mb-2">
                             <i class="fas fa-glass-cheers text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">WELCOME DRINK</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">WELCOME DRINK</div>
                     </div>
                     
                     <!-- Soup (Veg) -->
@@ -153,7 +169,7 @@
                         <div class="category-icon text-green-500 mb-2">
                             <i class="fas fa-utensils text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">SOUP (VEG)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">SOUP (VEG)</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -162,7 +178,7 @@
                         <div class="category-icon text-red-500 mb-2">
                             <i class="fas fa-utensils text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">SOUP (NON-VEG)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">SOUP (NON-VEG)</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -171,7 +187,7 @@
                         <div class="category-icon text-yellow-500 mb-2">
                             <i class="fas fa-pepper-hot text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">CHAT COUNTER</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">CHAT COUNTER</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -180,7 +196,7 @@
                         <div class="category-icon text-green-500 mb-2">
                             <i class="fas fa-seedling text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">COUNTER DRESSING (VEG)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">COUNTER DRESSING (VEG)</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -189,7 +205,7 @@
                         <div class="category-icon text-red-500 mb-2">
                             <i class="fas fa-drumstick-bite text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">COUNTER DRESSING (NON-VEG)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">COUNTER DRESSING (NON-VEG)</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -198,7 +214,7 @@
                         <div class="category-icon text-green-500 mb-2">
                             <i class="fas fa-carrot text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">STARTERS (VEG)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">STARTERS (VEG)</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -207,7 +223,7 @@
                         <div class="category-icon text-yellow-200 mb-2">
                             <i class="fas fa-cheese text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">STARTERS (PANEER)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">STARTERS (PANEER)</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -216,7 +232,7 @@
                         <div class="category-icon text-gray-300 mb-2">
                             <i class="fas fa-seedling text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">STARTERS (MUSHROOM)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">STARTERS (MUSHROOM)</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -225,16 +241,16 @@
                         <div class="category-icon text-orange-500 mb-2">
                             <i class="fas fa-drumstick-bite text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">STARTERS (CHICKEN)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">STARTERS (CHICKEN)</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
-                    <!-- Starters (Fish) - Active -->
-                    <div class="menu-item active rounded-lg p-3 cursor-pointer text-white flex flex-col items-center justify-center border border-red-700" data-category="starters-fish" data-type="non-veg">
-                        <div class="category-icon text-white mb-2">
+                    <!-- Starters (Fish) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="starters-fish" data-type="non-veg">
+                        <div class="category-icon text-blue-400 mb-2">
                             <i class="fas fa-fish text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">STARTERS (FISH)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">STARTERS (FISH)</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -243,7 +259,7 @@
                         <div class="category-icon text-pink-500 mb-2">
                             <i class="fas fa-water text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">STARTERS (PRAWN)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">STARTERS (PRAWN)</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -252,7 +268,7 @@
                         <div class="category-icon text-yellow-400 mb-2">
                             <i class="fas fa-egg text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">STARTERS (EGG)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">STARTERS (EGG)</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -261,7 +277,7 @@
                         <div class="category-icon text-red-700 mb-2">
                             <i class="fas fa-drumstick-bite text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">STARTERS (MUTTON)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">STARTERS (MUTTON)</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -270,7 +286,7 @@
                         <div class="category-icon text-yellow-100 mb-2">
                             <i class="fas fa-bowl-rice text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">MAIN COURSE (RICE)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">MAIN COURSE (RICE)</div>
                     </div>
                     
                     <!-- Main Course (Non-Veg) -->
@@ -278,7 +294,7 @@
                         <div class="category-icon text-red-500 mb-2">
                             <i class="fas fa-utensils text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">MAIN COURSE (NON-VEG)</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">MAIN COURSE (NON-VEG)</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -287,7 +303,7 @@
                         <div class="category-icon text-amber-300 mb-2">
                             <i class="fas fa-bread-slice text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">POPULAR INDIAN BREADS</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">POPULAR INDIAN BREADS</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -296,7 +312,7 @@
                         <div class="category-icon text-yellow-200 mb-2">
                             <i class="fas fa-bacon text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">NOODLES</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">NOODLES</div>
                     </div>
                     
                     <!-- Dal -->
@@ -304,7 +320,7 @@
                         <div class="category-icon text-yellow-600 mb-2">
                             <i class="fas fa-mortar-pestle text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">DAL</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">DAL</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -313,7 +329,7 @@
                         <div class="category-icon text-green-400 mb-2">
                             <i class="fas fa-blender text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">ASSORTED INDIAN CHUTNEY</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">ASSORTED INDIAN CHUTNEY</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -322,7 +338,7 @@
                         <div class="category-icon text-green-500 mb-2">
                             <i class="fas fa-carrot text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">CHOICE OF VEGETABLES</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">CHOICE OF VEGETABLES</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -331,7 +347,7 @@
                         <div class="category-icon text-yellow-100 mb-2">
                             <i class="fas fa-cheese text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">PANEER DELICACIES</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">PANEER DELICACIES</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -340,7 +356,7 @@
                         <div class="category-icon text-gray-300 mb-2">
                             <i class="fas fa-seedling text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">MUSHROOM DELICACIES</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">MUSHROOM DELICACIES</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -349,7 +365,7 @@
                         <div class="category-icon text-orange-500 mb-2">
                             <i class="fas fa-drumstick-bite text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">CHICKEN CUISINES</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">CHICKEN CUISINES</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -358,7 +374,7 @@
                         <div class="category-icon text-blue-400 mb-2">
                             <i class="fas fa-fish text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">FISH VARIETIES</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">FISH VARIETIES</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -367,7 +383,7 @@
                         <div class="category-icon text-pink-500 mb-2">
                             <i class="fas fa-water text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">PRAWNS & CRABS CUISINE</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">PRAWNS & CRABS CUISINE</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -376,7 +392,7 @@
                         <div class="category-icon text-red-700 mb-2">
                             <i class="fas fa-drumstick-bite text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">MUTTON DELICACIES</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">MUTTON DELICACIES</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -385,7 +401,7 @@
                         <div class="category-icon text-yellow-400 mb-2">
                             <i class="fas fa-egg text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">EGGS</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">EGGS</div>
                         <div class="non-veg-indicator mt-1"></div>
                     </div>
                     
@@ -394,7 +410,7 @@
                         <div class="category-icon text-pink-300 mb-2">
                             <i class="fas fa-cookie text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">DESERT</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">DESERT</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -403,7 +419,7 @@
                         <div class="category-icon text-blue-200 mb-2">
                             <i class="fas fa-ice-cream text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">ICE CREAM</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">ICE CREAM</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -412,7 +428,7 @@
                         <div class="category-icon text-amber-400 mb-2">
                             <i class="fas fa-birthday-cake text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">BAKERY</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">BAKERY</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                     
@@ -421,7 +437,7 @@
                         <div class="category-icon text-green-600 mb-2">
                             <i class="fas fa-leaf text-xl"></i>
                         </div>
-                        <div class="text-center text-sm font-medium">PAN</div>
+                        <div class="text-center text-xs sm:text-sm font-medium">PAN</div>
                         <div class="veg-indicator mt-1"></div>
                     </div>
                 </div>
@@ -3280,6 +3296,9 @@
             
             // Function to show submenu
             function showSubmenu(category) {
+                // Show submenu container
+                submenuContainer.classList.add('active');
+                
                 // Hide all submenus
                 submenus.forEach(submenu => {
                     submenu.classList.remove('active');
@@ -3370,13 +3389,8 @@
                 showNonVegBtn.classList.remove('ring-2', 'ring-white');
             });
             
-            // Show first category by default (Welcome Drink)
-            const firstMenuItem = document.querySelector('.menu-item');
-            if (firstMenuItem) {
-                firstMenuItem.classList.add('active');
-                const firstCategory = firstMenuItem.getAttribute('data-category');
-                showSubmenu(firstCategory);
-            }
+            // Hide submenu container by default - no default selection
+            submenuContainer.classList.remove('active');
         });
     </script>
 </body>
