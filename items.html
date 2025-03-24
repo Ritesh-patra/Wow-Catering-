@@ -6,19 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .menu-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        
         .menu-item {
-            transition: background-color 0.3s ease;
-        }
-
-        .submenu {
-            max-height: 0;
+            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
-            transition: max-height 0.5s ease;
+            z-index: 1;
         }
-
-        .submenu.active {
-            max-height: 2000px;
+        
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .menu-item:hover::before {
+            left: 0;
+        }
+        
+        .menu-item.active {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .category-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover .category-icon {
+            transform: scale(1.2);
+        }
+        
+        .menu-container {
+            background-image: url('https://i.pinimg.com/originals/e4/e5/91/e4e591ac643c9e6b1c80f0d0b4b6df10.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .menu-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+        }
+        
+        .menu-grid {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .veg-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+        }
+        
+        .non-veg-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #D32F2F;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -26,55 +97,336 @@
 <body class="bg-gray-100">
     <div class="max-w-9xl mx-auto">
         <!-- Main Menu Categories -->
-        <div class="bg-black text-gray-300 p-4 grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="welcome">WELCOME DRINK</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="soup-veg">SOUP(VEG)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="soup-nonveg">SOUP(NON-VEG)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="chat">CHAT COUNTER</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="dressing-veg">COUNTER
-                DRESSING(VEG)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="dressing-nonveg">COUNTER
-                DRESSING(NON-VEG)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-veg">STARTERS(VEG)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-paneer">STARTERS(PANEER)
+        <div class="menu-container p-6 md:p-10">
+            <div class="max-w-7xl mx-auto">
+                <!-- Menu Header -->
+                <div class="text-center mb-8">
+                    <h2 class="menu-heading text-3xl md:text-4xl font-bold text-white mb-3">Our Culinary Selection</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">Explore our extensive menu categories featuring the finest dishes from around the world</p>
+                    <div class="flex justify-center items-center gap-6 mt-4">
+                        <div class="flex items-center gap-2">
+                            <div class="veg-indicator"></div>
+                            <span class="text-gray-300 text-sm">Vegetarian</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="non-veg-indicator"></div>
+                            <span class="text-gray-300 text-sm">Non-Vegetarian</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filter Buttons - Moved to top for better visibility -->
+                <div class="mb-6 flex flex-wrap justify-center gap-4">
+                    <button id="showVeg" class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition flex items-center gap-2">
+                        <div class="veg-indicator"></div>
+                        <span>Veg Only</span>
+                    </button>
+                    <button id="showNonVeg" class="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800 transition flex items-center gap-2">
+                        <div class="non-veg-indicator"></div>
+                        <span>Non-Veg Only</span>
+                    </button>
+                    <button id="showAll" class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+                        <span>Show All</span>
+                    </button>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative w-full max-w-md mx-auto mb-8">
+                    <input type="text" id="searchMenu" placeholder="Search menu categories..." class="w-full px-4 py-2 pl-10 bg-black bg-opacity-70 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                
+                <!-- Menu Categories Grid -->
+                <div class="menu-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+                    <!-- Welcome Drink -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="welcome" data-type="both">
+                        <div class="category-icon text-amber-500 mb-2">
+                            <i class="fas fa-glass-cheers text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">WELCOME DRINK</div>
+                    </div>
+                    
+                    <!-- Soup (Veg) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="soup-veg" data-type="veg">
+                        <div class="category-icon text-green-500 mb-2">
+                            <i class="fas fa-utensils text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">SOUP (VEG)</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Soup (Non-Veg) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="soup-nonveg" data-type="non-veg">
+                        <div class="category-icon text-red-500 mb-2">
+                            <i class="fas fa-utensils text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">SOUP (NON-VEG)</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Chat Counter -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="chat" data-type="veg">
+                        <div class="category-icon text-yellow-500 mb-2">
+                            <i class="fas fa-pepper-hot text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">CHAT COUNTER</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Counter Dressing (Veg) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="dressing-veg" data-type="veg">
+                        <div class="category-icon text-green-500 mb-2">
+                            <i class="fas fa-seedling text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">COUNTER DRESSING (VEG)</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Counter Dressing (Non-Veg) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="dressing-nonveg" data-type="non-veg">
+                        <div class="category-icon text-red-500 mb-2">
+                            <i class="fas fa-drumstick-bite text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">COUNTER DRESSING (NON-VEG)</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Starters (Veg) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="starters-veg" data-type="veg">
+                        <div class="category-icon text-green-500 mb-2">
+                            <i class="fas fa-carrot text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">STARTERS (VEG)</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Starters (Paneer) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="starters-paneer" data-type="veg">
+                        <div class="category-icon text-yellow-200 mb-2">
+                            <i class="fas fa-cheese text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">STARTERS (PANEER)</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Starters (Mushroom) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="starters-mushroom" data-type="veg">
+                        <div class="category-icon text-gray-300 mb-2">
+                            <i class="fas fa-seedling text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">STARTERS (MUSHROOM)</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Starters (Chicken) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="starters-chicken" data-type="non-veg">
+                        <div class="category-icon text-orange-500 mb-2">
+                            <i class="fas fa-drumstick-bite text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">STARTERS (CHICKEN)</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Starters (Fish) - Active -->
+                    <div class="menu-item active rounded-lg p-3 cursor-pointer text-white flex flex-col items-center justify-center border border-red-700" data-category="starters-fish" data-type="non-veg">
+                        <div class="category-icon text-white mb-2">
+                            <i class="fas fa-fish text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">STARTERS (FISH)</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Starters (Prawn) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="starters-prawn" data-type="non-veg">
+                        <div class="category-icon text-pink-500 mb-2">
+                            <i class="fas fa-water text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">STARTERS (PRAWN)</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Starters (Egg) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="starters-egg" data-type="non-veg">
+                        <div class="category-icon text-yellow-400 mb-2">
+                            <i class="fas fa-egg text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">STARTERS (EGG)</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Starters (Mutton) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="starters-mutton" data-type="non-veg">
+                        <div class="category-icon text-red-700 mb-2">
+                            <i class="fas fa-drumstick-bite text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">STARTERS (MUTTON)</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Main Course (Rice) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="main-rice" data-type="both">
+                        <div class="category-icon text-yellow-100 mb-2">
+                            <i class="fas fa-bowl-rice text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">MAIN COURSE (RICE)</div>
+                    </div>
+                    
+                    <!-- Main Course (Non-Veg) -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="main-nonveg" data-type="non-veg">
+                        <div class="category-icon text-red-500 mb-2">
+                            <i class="fas fa-utensils text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">MAIN COURSE (NON-VEG)</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Popular Indian Breads -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="breads" data-type="veg">
+                        <div class="category-icon text-amber-300 mb-2">
+                            <i class="fas fa-bread-slice text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">POPULAR INDIAN BREADS</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Noodles -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="noodles" data-type="both">
+                        <div class="category-icon text-yellow-200 mb-2">
+                            <i class="fas fa-bacon text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">NOODLES</div>
+                    </div>
+                    
+                    <!-- Dal -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="dal" data-type="veg">
+                        <div class="category-icon text-yellow-600 mb-2">
+                            <i class="fas fa-mortar-pestle text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">DAL</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Assorted Indian Chutney -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="chutney" data-type="veg">
+                        <div class="category-icon text-green-400 mb-2">
+                            <i class="fas fa-blender text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">ASSORTED INDIAN CHUTNEY</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Choice of Vegetables -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="vegetables" data-type="veg">
+                        <div class="category-icon text-green-500 mb-2">
+                            <i class="fas fa-carrot text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">CHOICE OF VEGETABLES</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Paneer Delicacies -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="paneer" data-type="veg">
+                        <div class="category-icon text-yellow-100 mb-2">
+                            <i class="fas fa-cheese text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">PANEER DELICACIES</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Mushroom Delicacies -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="mushroom" data-type="veg">
+                        <div class="category-icon text-gray-300 mb-2">
+                            <i class="fas fa-seedling text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">MUSHROOM DELICACIES</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Chicken Cuisines -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="chicken" data-type="non-veg">
+                        <div class="category-icon text-orange-500 mb-2">
+                            <i class="fas fa-drumstick-bite text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">CHICKEN CUISINES</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Fish Varieties -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="fish" data-type="non-veg">
+                        <div class="category-icon text-blue-400 mb-2">
+                            <i class="fas fa-fish text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">FISH VARIETIES</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Prawns & Crabs -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="prawns" data-type="non-veg">
+                        <div class="category-icon text-pink-500 mb-2">
+                            <i class="fas fa-water text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">PRAWNS & CRABS CUISINE</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Mutton Delicacies -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="mutton" data-type="non-veg">
+                        <div class="category-icon text-red-700 mb-2">
+                            <i class="fas fa-drumstick-bite text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">MUTTON DELICACIES</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Eggs -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="eggs" data-type="non-veg">
+                        <div class="category-icon text-yellow-400 mb-2">
+                            <i class="fas fa-egg text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">EGGS</div>
+                        <div class="non-veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Desert -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="desert" data-type="veg">
+                        <div class="category-icon text-pink-300 mb-2">
+                            <i class="fas fa-cookie text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">DESERT</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Ice Cream -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="icecream" data-type="veg">
+                        <div class="category-icon text-blue-200 mb-2">
+                            <i class="fas fa-ice-cream text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">ICE CREAM</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Bakery -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="bakery" data-type="veg">
+                        <div class="category-icon text-amber-400 mb-2">
+                            <i class="fas fa-birthday-cake text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">BAKERY</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                    
+                    <!-- Pan -->
+                    <div class="menu-item rounded-lg p-3 cursor-pointer hover:text-white flex flex-col items-center justify-center bg-black bg-opacity-70 hover:bg-opacity-90 text-gray-300 border border-gray-800" data-category="pan" data-type="veg">
+                        <div class="category-icon text-green-600 mb-2">
+                            <i class="fas fa-leaf text-xl"></i>
+                        </div>
+                        <div class="text-center text-sm font-medium">PAN</div>
+                        <div class="veg-indicator mt-1"></div>
+                    </div>
+                </div>
             </div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-mushroom">
-                STARTERS(MUSHROOM)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-chicken">
-                STARTERS(CHICKEN)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white bg-red-700 text-white"
-                data-category="starters-fish">STARTERS(FISH)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-prawn">STARTERS(PRAWN)
-            </div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-egg">STARTERS(EGG)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="starters-mutton">STARTERS(MUTTON)
-            </div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="main-rice">MAIN COURSE(RICE)</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="main-nonveg">MAIN COURSE(NON-VEG)
-            </div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="breads">POPULAR INDIAN BREADS
-            </div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="noodles">NOODLES</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="dal">DAL</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="chutney">ASSORTED INDIAN CHUTNEY
-            </div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="vegetables">CHOICE OF VEGETABLES
-            </div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="paneer">PANEER DELICACIES</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="mushroom">MUSHROOM DELICACIES
-            </div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="chicken">CHICKEN CUISINES</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="fish">FISH VARIETIES</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="prawns">PRAWNS & CRABS AUTHENTIC
-                CUISINE</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="mutton">MUTTON DELICACIES</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="eggs">EGGS</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="desert">DESERT</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="icecream">ICE CREAM</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="bakery">BAKERY</div>
-            <div class="menu-item p-2 cursor-pointer hover:text-white" data-category="pan">PAN</div>
         </div>
-
 
 
         <!-- Submenu Containers -->
@@ -2397,80 +2749,35 @@
 
             <!-- Example for MUTTON DELICACIES -->
             <div id="mutton-submenu" class="submenu py-7 p-4">
-                <h2 class="text-xl font-semibold mb-4">MAIN COURSE(RICE)</h2>
-                <div id="chicken-dishes-submenu" class="submenu py-7 p-4">
-                    <h2 class="text-xl font-semibold mb-4">CHICKEN DISHES</h2>
-                    <div class="space-y-3">
-                        <div class="flex items-center"><input type="checkbox" id="chicken-1" class="mr-2"><label
-                                for="chicken-1">Chicken Kassa</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-2" class="mr-2"><label
-                                for="chicken-2">Desi Chicken Kassa/ Masala</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-3" class="mr-2"><label
-                                for="chicken-3">Chicken Butter Masala</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-4" class="mr-2"><label
-                                for="chicken-4">Chicken Tikka Butter Masala</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-5" class="mr-2"><label
-                                for="chicken-5">Chicken Punjabi</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-6" class="mr-2"><label
-                                for="chicken-6">Chicken Amritsari Masala</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-7" class="mr-2"><label
-                                for="chicken-7">Chicken Hyderabadi</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-8" class="mr-2"><label
-                                for="chicken-8">Chicken Kerala Roast</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-9" class="mr-2"><label
-                                for="chicken-9">Chicken Chettinad</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-10" class="mr-2"><label
-                                for="chicken-10">Tangy Spicy Kadhai Chicken</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-11" class="mr-2"><label
-                                for="chicken-11">Dahi Chicken</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-12" class="mr-2"><label
-                                for="chicken-12">Mustard Chicken</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-13" class="mr-2"><label
-                                for="chicken-13">Chicken Khubani Masala</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-14" class="mr-2"><label
-                                for="chicken-14">Chicken Lababdar</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-15" class="mr-2"><label
-                                for="chicken-15">Chicken Rezala</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-16" class="mr-2"><label
-                                for="chicken-16">Methi Murg</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-17" class="mr-2"><label
-                                for="chicken-17">Murg Malaiwala</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-18" class="mr-2"><label
-                                for="chicken-18">Chicken Dopyaza</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-19" class="mr-2"><label
-                                for="chicken-19">Chicken Bhunaa Masala</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-20" class="mr-2"><label
-                                for="chicken-20">Hariyaali Chicken</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-21" class="mr-2"><label
-                                for="chicken-21">Chicken Makhani</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-22" class="mr-2"><label
-                                for="chicken-22">Bengali Chicken Curry with Potato</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-23" class="mr-2"><label
-                                for="chicken-23">Chicken Korma</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-24" class="mr-2"><label
-                                for="chicken-24">Chicken Vindaloo</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-25" class="mr-2"><label
-                                for="chicken-25">Palak Chicken</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-26" class="mr-2"><label
-                                for="chicken-26">Chicken Kolhapuri</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-27" class="mr-2"><label
-                                for="chicken-27">Achari Chicken</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-28" class="mr-2"><label
-                                for="chicken-28">Chicken Bharta</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-29" class="mr-2"><label
-                                for="chicken-29">Chicken Mughlai</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-30" class="mr-2"><label
-                                for="chicken-30">Chilly Chicken</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-31" class="mr-2"><label
-                                for="chicken-31">Lemon Chicken</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-32" class="mr-2"><label
-                                for="chicken-32">Chicken Manchurian</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-33" class="mr-2"><label
-                                for="chicken-33">Murg Kali Mirch</label></div>
-                        <div class="flex items-center"><input type="checkbox" id="chicken-34" class="mr-2"><label
-                                for="chicken-34">Murg Sahi Korma</label></div>
-                    </div>
+                <h2 class="text-xl font-semibold mb-4">MUTTON DELICACIES</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center"><input type="checkbox" id="mutton-1" class="mr-2"><label for="mutton-1">Mutton Home Style</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-2" class="mr-2"><label for="mutton-2">Mutton Curry Home Style with Potato</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-3" class="mr-2"><label for="mutton-3">Mutton Rogan Josh</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-4" class="mr-2"><label for="mutton-4">Mutton Kassa</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-5" class="mr-2"><label for="mutton-5">Mutton Liver Keema Fry</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-6" class="mr-2"><label for="mutton-6">Rajasthani Lal Maas</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-7" class="mr-2"><label for="mutton-7">Mutton Ghee Roast</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-8" class="mr-2"><label for="mutton-8">Kerala Style Mutton Pepper</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-9" class="mr-2"><label for="mutton-9">Mutton Vindaloo</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-10" class="mr-2"><label for="mutton-10">Mutton Chaap</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-11" class="mr-2"><label for="mutton-11">Bhunaa Gosht</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-12" class="mr-2"><label for="mutton-12">Nihari Gosht</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-13" class="mr-2"><label for="mutton-13">Dhaba Mutton</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-14" class="mr-2"><label for="mutton-14">Mutton Rasa</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-15" class="mr-2"><label for="mutton-15">Mutton Banjara</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-16" class="mr-2"><label for="mutton-16">Bengali Style Mangsher Jhol</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-17" class="mr-2"><label for="mutton-17">Paya Curry</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-18" class="mr-2"><label for="mutton-18">Mutton Handi</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-19" class="mr-2"><label for="mutton-19">Mutton Rezala</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-20" class="mr-2"><label for="mutton-20">Mutton Aloo Korma</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-21" class="mr-2"><label for="mutton-21">Achari Mutton</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-22" class="mr-2"><label for="mutton-22">Mutton Mughlai</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-23" class="mr-2"><label for="mutton-23">Grilled Mutton Chops</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-24" class="mr-2"><label for="mutton-24">Caribbean Grilled Mutton</label></div>
+                    <div class="flex items-center"><input type="checkbox" id="mutton-25" class="mr-2"><label for="mutton-25">Glorious Special Mutton</label></div>
                 </div>
+                
 
             </div>
 
@@ -2838,7 +3145,7 @@
             </div>
 
             <!-- Example for ICeCreams -->
-            <div id="icecreams-submenu" class="submenu py-7 p-4">
+            <div id="icecream-submenu" class="submenu py-7 p-4">
                 <h2 class="text-xl font-semibold mb-4">ICE CREAM</h2>
                 <div class="space-y-3">
                     <div class="flex items-center">
@@ -2991,6 +3298,85 @@
                     if (targetSubmenu) {
                         targetSubmenu.classList.add('active');
                     }
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const searchInput = document.getElementById('searchMenu');
+            const showVegBtn = document.getElementById('showVeg');
+            const showNonVegBtn = document.getElementById('showNonVeg');
+            const showAllBtn = document.getElementById('showAll');
+            
+            // Add click event to menu items
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Get category
+                    const category = this.getAttribute('data-category');
+                    console.log(`Selected category: ${category}`);
+                    
+                    // Here you would typically show the menu items for this category
+                });
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                menuItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Filter buttons
+            showVegBtn.addEventListener('click', function() {
+                menuItems.forEach(item => {
+                    if (item.querySelector('.veg-indicator')) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+            
+            showNonVegBtn.addEventListener('click', function() {
+                menuItems.forEach(item => {
+                    if (item.querySelector('.non-veg-indicator')) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+            
+            showAllBtn.addEventListener('click', function() {
+                menuItems.forEach(item => {
+                    item.style.display = 'flex';
+                });
+            });
+            
+            // Add hover effect
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.classList.add('hover:shadow-lg');
+                    }
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.classList.remove('hover:shadow-lg');
                 });
             });
         });
