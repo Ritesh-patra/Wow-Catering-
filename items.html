@@ -10,7 +10,7 @@
     <style>
          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
         
-        body {
+         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f5f5f5;
         }
@@ -3269,45 +3269,31 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get all menu items
+         document.addEventListener('DOMContentLoaded', function() {
             const menuItems = document.querySelectorAll('.menu-item');
-
-            // Add click event to each menu item
-            menuItems.forEach(item => {
-                item.addEventListener('click', function () {
-                    // Get the category
-                    const category = this.getAttribute('data-category');
-
-                    // Remove active class and highlight from all menu items
-                    menuItems.forEach(menuItem => {
-                        menuItem.classList.remove('bg-red-700', 'text-white');
-                    });
-
-                    // Add highlight to clicked item
-                    this.classList.add('bg-red-700', 'text-white');
-
-                    // Hide all submenus
-                    const submenus = document.querySelectorAll('.submenu');
-                    submenus.forEach(submenu => {
-                        submenu.classList.remove('active');
-                    });
-
-                    // Show the selected submenu
-                    const targetSubmenu = document.getElementById(`${category}-submenu`);
-                    if (targetSubmenu) {
-                        targetSubmenu.classList.add('active');
-                    }
-                });
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuItems = document.querySelectorAll('.menu-item');
+            const submenus = document.querySelectorAll('.submenu');
             const searchInput = document.getElementById('searchMenu');
             const showVegBtn = document.getElementById('showVeg');
             const showNonVegBtn = document.getElementById('showNonVeg');
             const showAllBtn = document.getElementById('showAll');
+            const submenuContainer = document.getElementById('submenu-container');
+            
+            // Function to show submenu
+            function showSubmenu(category) {
+                // Hide all submenus
+                submenus.forEach(submenu => {
+                    submenu.classList.remove('active');
+                });
+                
+                // Show the selected submenu
+                const targetSubmenu = document.getElementById(`${category}-submenu`);
+                if (targetSubmenu) {
+                    targetSubmenu.classList.add('active');
+                    
+                    // Scroll to submenu container
+                    submenuContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
             
             // Add click event to menu items
             menuItems.forEach(item => {
@@ -3320,9 +3306,9 @@
                     
                     // Get category
                     const category = this.getAttribute('data-category');
-                    console.log(`Selected category: ${category}`);
                     
-                    // Here you would typically show the menu items for this category
+                    // Show corresponding submenu
+                    showSubmenu(category);
                 });
             });
             
@@ -3343,42 +3329,54 @@
             // Filter buttons
             showVegBtn.addEventListener('click', function() {
                 menuItems.forEach(item => {
-                    if (item.querySelector('.veg-indicator')) {
+                    const type = item.getAttribute('data-type');
+                    if (type === 'veg' || type === 'both') {
                         item.style.display = 'flex';
                     } else {
                         item.style.display = 'none';
                     }
                 });
+                
+                // Highlight active button
+                showVegBtn.classList.add('ring-2', 'ring-white');
+                showNonVegBtn.classList.remove('ring-2', 'ring-white');
+                showAllBtn.classList.remove('ring-2', 'ring-white');
             });
             
             showNonVegBtn.addEventListener('click', function() {
                 menuItems.forEach(item => {
-                    if (item.querySelector('.non-veg-indicator')) {
+                    const type = item.getAttribute('data-type');
+                    if (type === 'non-veg' || type === 'both') {
                         item.style.display = 'flex';
                     } else {
                         item.style.display = 'none';
                     }
                 });
+                
+                // Highlight active button
+                showNonVegBtn.classList.add('ring-2', 'ring-white');
+                showVegBtn.classList.remove('ring-2', 'ring-white');
+                showAllBtn.classList.remove('ring-2', 'ring-white');
             });
             
             showAllBtn.addEventListener('click', function() {
                 menuItems.forEach(item => {
                     item.style.display = 'flex';
                 });
+                
+                // Highlight active button
+                showAllBtn.classList.add('ring-2', 'ring-white');
+                showVegBtn.classList.remove('ring-2', 'ring-white');
+                showNonVegBtn.classList.remove('ring-2', 'ring-white');
             });
             
-            // Add hover effect
-            menuItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    if (!this.classList.contains('active')) {
-                        this.classList.add('hover:shadow-lg');
-                    }
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.classList.remove('hover:shadow-lg');
-                });
-            });
+            // Show first category by default (Welcome Drink)
+            const firstMenuItem = document.querySelector('.menu-item');
+            if (firstMenuItem) {
+                firstMenuItem.classList.add('active');
+                const firstCategory = firstMenuItem.getAttribute('data-category');
+                showSubmenu(firstCategory);
+            }
         });
     </script>
 </body>
